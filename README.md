@@ -132,7 +132,10 @@ This model enables:
 ✔ accurate filtering across demographics, geography, and services
 ✔ simplified DAX implementation
 
+---
+
 # Key DAX Measures
+
 ## Core Metrics
 
 ```DAX
@@ -160,4 +163,64 @@ High Risk Customers = CALCULATE(
     FactCustomerStatus[Churn Score] >= 60
 )
 ```
+---
+
+# Dashboard Design & Storytelling
+
+Designed using Power BI + Figma, the dashboard follows a story-driven approach with four pages.
+
+## 📄 Page 1 — Executive Overview
+Purpose:
+
+Provide a high-level understanding of churn, revenue, and customer base health.
+
+Visuals:
+
+- KPI Cards
+
+  - Churn Rate
+
+  - Total Customers
+
+  - Monthly Revenue
+
+  - Avg CLTV
+
+- Donut Charts / Bars
+
+  - Churn by Contract Type
+
+  - Churn by Internet Service
+
+  - Churn by Tenure Group
+
+- Slicer Panel
+
+  - Gender
+
+  - Contract
+
+  - Internet Type
+
+Goal:
+Quickly identify the most problematic segments.
+
+## 📄 Page 2 — Customer Profile
+Purpose:
+
+Understand “who” churns.
+
+Visuals:
+
+- Bar Chart → Churn by Age Group
+
+- Bar Chart → Churn by Gender
+
+- Stacked Bar → Dependents / Senior Citizen
+
+- Map → Churn Rate by City / Zip Code
+
+Goal:
+Reveal demographic and geographic patterns.
+
 
