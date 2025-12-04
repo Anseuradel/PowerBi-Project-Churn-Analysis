@@ -79,4 +79,85 @@ This project aims to:
 
 By combining strong analytics with thoughtful UI design, this project demonstrates both technical and storytelling skills—essential for successful BI and data analytics work.
 
+---
+
+# Problem Statement
+
+Telecom companies face a major challenge: customer churn. Acquiring new customers is significantly more expensive than retaining existing ones.
+Understanding who churns, why they churn, and how to prevent it is essential for profitability.
+
+This project answers the following key business questions:
+
+1. What is the overall churn rate?
+
+2. Which customer segments are most likely to churn?
+
+3. How do services, contracts, charges, and satisfaction levels influence churn?
+
+4. Which geographic areas show higher churn risk?
+
+5. How can the company prioritize high-value customers at risk?
+
+The goal is to provide clear, actionable insights to guide retention strategy, customer experience improvements, and revenue protection.
+
+# Data Modeling
+
+To support efficient analysis, I designed a clean Star Schema with one Fact table and four Dimensional tables.
+
+## Fact Table
+FactCustomerStatus
+
+Contains quarterly status information, churn labels, churn scores, CLTV, satisfaction, and all service/billing metrics merged from Services.
+
+## Dimension Tables
+| Dimension Table |	Description	| Key |
+| -------------------- | -------------------------------------------------- |----|
+| DimCustomerDemographics |	Age, gender, dependents, senior status | CustomerID |
+| DimLocation	| City, State, Zip Code, coordinates	| CustomerID |
+| DimZipPopulation |	Population per ZIP Code	| ZipCode |
+
+## Relationships
+
+DimCustomerDemographics (1) → (∞) FactCustomerStatus
+
+DimLocation (1) → (∞) FactCustomerStatus
+
+DimZipPopulation (1) → (∞) DimLocation
+
+DimDate (1) → (∞) FactCustomerStatus
+
+This model enables:
+
+✔ clean slicing of churn metrics
+✔ accurate filtering across demographics, geography, and services
+✔ simplified DAX implementation
+
+# Key DAX Measures
+## Core Metrics
+
+```DAX
+Total Customers = COUNTROWS(FactCustomerStatus)
+
+Churned Customers = CALCULATE(
+    COUNTROWS(FactCustomerStatus),
+    FactCustomerStatus[Churn Value] = 1
+)
+
+Churn Rate = DIVIDE([Churned Customers], [Total Customers])
+
+Average Monthly Revenue = AVERAGE(FactCustomerStatus[Monthly Charge])
+
+Total Revenue = SUM(FactCustomerStatus[Total Revenue])
+```
+
+## Customer Value & Risk
+
+```DAX
+Average CLTV = AVERAGE(FactCustomerStatus[CLTV])
+
+High Risk Customers = CALCULATE(
+    COUNTROWS(FactCustomerStatus),
+    FactCustomerStatus[Churn Score] >= 60
+)
+```
 
