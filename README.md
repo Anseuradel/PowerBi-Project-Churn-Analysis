@@ -10,6 +10,19 @@
   <img src="https://img.shields.io/badge/Dashboard-FF6B6B?style=for-the-badge&logo=tableau&logoColor=white" alt="Dashboard"/>
 </div>
 
+
+## Dashboard Preview
+
+### Page 1 — Churn Overview
+![Overview](assets/images/screenshots/powerbi/Powerbi-page-1-dashboard.png)
+
+### Page 2 — Customer Profile
+![Profile](assets/images/screenshots/powerbi/Powerbi-page-2-dashboard.png)
+
+### Page 3 — Services & Behavior
+![Services](assets/images/screenshots/powerbi/Powerbi-page-3-dashboard.png)
+
+
 ---
 
 # Project Overview 
@@ -30,34 +43,33 @@ This project also serves as a demonstration of my analytical skills to recruiter
 
 ## Data Source : 
 
-The dataset used is the IBM Telco Customer Churn Dataset, which contains information about 7,043 fictional telecom customers in California during Q3.
+The dataset used for this project is the IBM Telco Customer Churn Dataset, containing data for 7,043 fictional telecom customers in California (Q3).
 
-It includes:
+The dataset includes:
 
 - Customer demographics
 
-- Subscription information
+- Geographical information
 
-- Services used (Internet, Phone, Streaming, etc.)
+- Contract and service usage
 
-- Billing & charges
-
-- Customer Lifetime Value (CLTV)
+- Billing and pricing metrics
 
 - Churn labels and churn scores
 
-- Satisfaction ratings
+- Satisfaction levels
 
-I chose this dataset because customer churn is one of the most critical challenges for telecom companies. As customers, we often notice how aggressively telecom providers try to retain us when we attempt to cancel a subscription.
-This project allowed me to step into the role of a telecom data analyst, uncovering churn patterns and providing actionable insights to improve retention.
+- Customer Lifetime Value (CLTV)
 
-Additionally, using a public IBM dataset avoids exposing any sensitive or proprietary company data.
+I selected this dataset because customer churn is one of the most critical business problems in the telecom industry. This project simulates a real-world business scenario where a data analyst must understand customer behavior and propose actionable retention strategies.
+
+Using a public dataset also ensures that no sensitive or proprietary company data is exposed.
 
 ## Technology : 
 
 For this end-to-end project, I used:
 
-- Power BI → data understanding, cleaning, modeling, DAX measures, and dashboard design
+- Power BI desktop → data understanding, cleaning, modeling, DAX measures, and dashboard design
 
 - Power Query → data transformation
 
@@ -65,19 +77,19 @@ For this end-to-end project, I used:
 
 - GitHub → version control and project documentation
 
-## Impact : 
+## Business Impact : 
 
-This project aims to:
+This project demonstrates the ability to:
 
-- Strengthen my practical skills in data analysis and business intelligence
+- Reduce customer churn through data-driven insights
 
-- Build a professional portfolio piece
+- Identify high-risk customer segments
 
-- Provide clear, data-driven insights to reduce customer churn
+- Highlight retention opportunities
 
-- Identify customer behaviors, risk factors, and retention opportunities
+- Translate analytics into business strategy
 
-By combining strong analytics with thoughtful UI design, this project demonstrates both technical and storytelling skills—essential for successful BI and data analytics work.
+The final dashboard bridges technical analysis and business storytelling, which is essential for modern BI and analytics roles.
 
 ---
 
@@ -94,9 +106,9 @@ This project answers the following key business questions:
 
 3. How do services, contracts, charges, and satisfaction levels influence churn?
 
-4. Which geographic areas show higher churn risk?
+4. Which regions show higher churn risk?
 
-5. How can the company prioritize high-value customers at risk?
+5. What strategic actions can reduce churn and protect revenue?
 
 The goal is to provide clear, actionable insights to guide retention strategy, customer experience improvements, and revenue protection.
 
@@ -107,7 +119,17 @@ To support efficient analysis, I designed a clean Star Schema with one Fact tabl
 ## Fact Table
 FactCustomerStatus
 
-Contains quarterly status information, churn labels, churn scores, CLTV, satisfaction, and all service/billing metrics merged from Services.
+Contains:
+
+- Churn status and churn scores
+
+- Satisfaction scores
+
+- CLTV
+
+- Billing and revenue metrics
+
+- Service usage (merged from Services table)
 
 ## Dimension Tables
 | Dimension Table |	Description	| Key |
@@ -118,19 +140,19 @@ Contains quarterly status information, churn labels, churn scores, CLTV, satisfa
 
 ## Relationships
 
-DimCustomerDemographics (1) → (∞) FactCustomerStatus
+DimCustomerDemographics (1) → (*) FactCustomerStatus
 
-DimLocation (1) → (∞) FactCustomerStatus
+DimLocation (1) → (*) FactCustomerStatus
 
-DimZipPopulation (1) → (∞) DimLocation
+DimZipPopulation (1) → (*) DimLocation
 
-DimDate (1) → (∞) FactCustomerStatus
+DimDate (1) → (*) FactCustomerStatus
 
-This model enables:
+This structure allow:
 
-✔ clean slicing of churn metrics
-✔ accurate filtering across demographics, geography, and services
-✔ simplified DAX implementation
+✅ fast filtering
+✅ clean slicing by geography and demographics
+✅ scalable DAX calculations
 
 ---
 
@@ -169,7 +191,7 @@ High Risk Customers = CALCULATE(
 
 Designed using Power BI + Figma, the dashboard follows a story-driven approach with four pages.
 
-## 📄 Page 1 — Executive Overview
+## Page 1 — Executive Overview
 Purpose:
 
 Provide a high-level understanding of churn, revenue, and customer base health.
@@ -205,10 +227,11 @@ Visuals:
 Goal:
 Quickly identify the most problematic segments.
 
-## 📄 Page 2 — Customer Profile
+## Page 2 — Customer Profile
+
 Purpose:
 
-Understand “who” churns.
+Understand who is churning and where churn is most concentrated.
 
 Visuals:
 
@@ -216,11 +239,62 @@ Visuals:
 
 - Bar Chart → Churn by Gender
 
-- Stacked Bar → Dependents / Senior Citizen
+- Column Chart → Churn by Number of Dependents
 
-- Map → Churn Rate by City / Zip Code
+- Bar Chart → Top 10 Cities with Highest Number of Churned Customers
 
 Goal:
-Reveal demographic and geographic patterns.
+Identify the customer profiles and geographic hotspots most impacted by churn
 
+## Page 3 — Services & Behavior
+
+Purpose:
+
+Understand how customer behavior, service type, and billing choices influence churn.
+
+Visuals:
+
+- Bar Chart → Churned Customers by Internet Type
+
+- Column Chart → Churn Rate by Monthly Charge Bands
+
+- Bar Chart → Churn Rate by Payment Method
+
+Goal:
+Reveal how service adoption and pricing structures affect customer retention and identify risky usage patterns.
+
+## Page 4 — Strategic Insights & Recommendations
+
+Purpose:
+
+Translate analytics into business decisions.
+
+Sections:
+
+- Key Insights
+
+- Strategic Recommendations
+
+- Business Impact
+
+This page focuses on executive-level takeaways instead of charts.
+
+---
+
+# How to Use This Project
+
+You can explore:
+
+- Dashboard screenshots in /assets/images/
+
+- Exported PDF in /dashboard/exports/
+
+- Power BI files locally (available upon request if size is large)
+
+---
+
+# Author
+
+Anseur Adel
+Data science student
 
