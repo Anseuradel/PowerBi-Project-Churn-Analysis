@@ -150,9 +150,11 @@ DimDate (1) → (*) FactCustomerStatus
 
 This structure allow:
 
-✅ fast filtering
-✅ clean slicing by geography and demographics
-✅ scalable DAX calculations
+- ✅ fast filtering
+- ✅ clean slicing by geography and demographics
+- ✅ scalable DAX calculations
+
+![Modeling](assets/images/screenshots/powerbi/PowerBI-modeling-graph.png)
 
 ---
 
